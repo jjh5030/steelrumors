@@ -27,8 +27,28 @@ DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+    ('John Doe', 'jjh5030@gmail.com'),
+)
+
+try:
+    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+except:
+    EMAIL_HOST_USER = ""
+    EMAIL_HOST_PASSWORD = ""
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+
+# We want to be notified of 404s via email to the MANAGERS
+SEND_BROKEN_LINK_EMAILS = True
+
+MANAGERS = ADMINS
 
 # Application definition
 
@@ -40,6 +60,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.comments',
     'links',
     'south',
     'allauth',

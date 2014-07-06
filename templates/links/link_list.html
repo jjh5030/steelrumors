@@ -4,12 +4,28 @@
 
 <ol>
 {% for link in object_list %}
-    <li>
-    <a href="{{ link.url }}">
+    <li>[{{ link.votes }}]
+    <a href="{% url 'link_detail' pk=link.pk %}">
       <b>{{ link.title }}</b>
     </a>
     </li>
 {% endfor %}
 </ol>
+
+{% if is_paginated %}
+	<ul class="pager">
+		{% if page_obj.has_previous %}
+	  <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">&larr; Older</a></li>
+	  {% endif %}
+
+	  {% if page_obj.has_next %}
+	  <li class="next"><a href="?page={{ page_obj.next_page_number }}">Newer &rarr;</a></li>
+	  {% endif %}
+	</ul>
+{% endif %}
+
+<blockquote style="background-color: #ddd; padding: 4px; border-radius: 10px; margin: 10px 0; color: #666; font-size: smaller; text-shadow: rgba(255,255,255,0.8) 1px 1px 0;">
+{{ randomquip.comment|truncatechars:140 }}
+</blockquote>
 
 {% endblock %}

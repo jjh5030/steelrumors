@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^$', LinkListView.as_view(), name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^users/', include('profiles.urls')),
 )

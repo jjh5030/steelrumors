@@ -4,11 +4,17 @@
 
 <ol>
 {% for link in object_list %}
-    <li>[{{ link.votes }}]
-    <a href="{% url 'link_detail' pk=link.pk %}">
-      <b>{{ link.title }}</b>
-    </a>
-    </li>
+	<form method="post" action="{% url 'vote' %}" class="vote_form">
+	    <li>[{{ link.votes }}]
+	    	{% csrf_token %}
+	    	<input type='hidden' id="id_link" name="link" class="hidden_id" value="{{ link.pk }}" />
+	    	<input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}" />
+	  		<button>+</button>
+	    <a href="{% url 'link_detail' pk=link.pk %}">
+	      <b>{{ link.title }}</b>
+	    </a>
+	    </li>
+	</form>
 {% endfor %}
 </ol>
 
